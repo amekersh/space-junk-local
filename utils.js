@@ -31,13 +31,29 @@ function timeToStringParts(timeMs) {
   }
   draw(score, lives){
     push()
-    
+    noStroke()
+    fill("#ffffff")
+    textSize(Level.HUD_TEXT_SIZE)
+    textAlign(LEFT,TOP)
+
+    const {mintues,seconds} = timeToStringParts(this.timeLeft())
+    text('${minutes}:${seconds}',Level.HUD_PAD, Level.HUD_PAD)
+
+    textAlign(RIGHT,TOP)
+    text('${score}', width - Level.HUD_PAD, Level.HUD_PAD)
+
   for (let i=0; i<lives - 1; i++){
+    push()
     translate(
       level.LIVES_PAD_LEFT + i * Level.LIVES_GAP,
       height - Level.LIVES_PAD_BOTTOM
     )
     scale(Level.LIVES_SCALE)
     Magpie.drawMagpie({rotation: .2, beam:false})
+    pop()
   }
+  for (const junk of this.junk){
+    junk.draw()
+  }
+  pop()
 }
