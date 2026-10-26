@@ -6,7 +6,7 @@ class Game {
   static LEVEL = { name: "Training", junk: 5, time: 120000 };
 
   lives;
-  levell
+  level;
   magpie;
   mothership;
   inputs;
@@ -82,8 +82,22 @@ class Game {
 
   
   resolveDropoff(delta) {
+    const junk = this.magpie.capturedJunk
+    if (junk == null) {
     return false;
   }
+  const pickupRadius = Mothership.PICKUP_DIAMETER/2
+  const distance = dist(
+    this.mothership.physics.x,
+    this.mothership.physics.y,
+    junk.physics.x,
+    junk.physics.y
+  )
+  if (distance <= pickupRadius){
+    return true
+  }
+  return false
+}
 
   draw() {
     this.level.draw(this.score, this.lives);
