@@ -94,9 +94,11 @@ class Game {
     junk.physics.y
   )
   if (distance <= pickupRadius){
-    return true
+    junk.dropoffTime = junk.dropoffTime + delta
+  } else {
+    junk.dropoffTime = Math.max(junk.dropoffTime - delta, 0)
   }
-  return false
+  return junk.dropoffTime > Game.JUNK_DROPOFF_TIME_MS
 }
 
   draw() {
@@ -123,6 +125,9 @@ class Game {
   }
 
   updateScore(reason) {
+    if (reason == "dropoff"){
+      this.score = this.score + Game.SCORE_DROPOFF
+    }
   }
 
   isLevelComplete() {
