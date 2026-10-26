@@ -47,7 +47,7 @@ class Game {
     this.inputs.handleKeyDown(delta);
     this.magpie.move(delta);
     this.mothership.move(delta);
-    this.level.move(delta, { countTime: !this.isLevelComplete()})
+    this.level.move(delta)
 
     const junk = this.resolveBeam(delta);
     if (junk) {
@@ -137,7 +137,7 @@ class Game {
   }
 
   isTimeUp(){
-    return this.level.elapsed >= this.level.time.initial
+    return this.level.time.elapsed >= this.level.time.initial
   }
 
   isLevelComplete() {

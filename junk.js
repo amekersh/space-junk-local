@@ -2,7 +2,7 @@ class Junk {
   static DIAMETER = 20;
 
   physics;
- beamTime;
+  beamTime;
   dropoffTime;
 
   constructor() {
