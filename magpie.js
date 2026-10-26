@@ -86,10 +86,8 @@ class Magpie {
   }
 
   beamContains({ x, y }) {
-    if (!this.beam) {
-      return false;
-    }
-
+    if (!this.beam) { return false;
+    
     let dx = x - this.physics.x
     let dy = y - this.physics.y
     
@@ -108,9 +106,11 @@ class Magpie {
   }
 
   enableBeam(v) {
-    if (!v) {
+    if (!v) 
       this.beam = false;
-    } else if (this.capturedJunk === null) {
+     else if (this.capturedJunk === null) 
       this.beam = true;
-    }
+    
   }
+}
+}
