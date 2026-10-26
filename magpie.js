@@ -102,17 +102,9 @@ class Magpie {
     this.physics.move(delta, { constrain: true });
 
     if (this.capturedJunk) {
-      push();
-
-      translate(this.physics.x, this.physics.y);
-      rotate(this.physics.rotation);
-
-      const cargo = worldToScreen(0, Magpie.CARGO_Y);
-
-      pop();
-
-      this.capturedJunk.physics.x = cargo.x;
-      this.capturedJunk.physics.y = cargo.y;
+     const rotation = this.physics.rotation
+     this.capturedJunk.physics.x = this.physics.x - Math.sin(rotation) * Magpie.CARGO_Y
+     this.capturedJunk.physics.y = this.physics.y + Math.cos(rotation) * Magpie.CARGO_Y
     }
   }
 
