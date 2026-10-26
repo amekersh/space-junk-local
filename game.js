@@ -111,6 +111,8 @@ class Game {
     this.magpie.draw();
     if (this.paused) {
       Game.drawMessage("Paused");
+    } else if (this.isTimeUp()){
+      Game.drawMessage("Time's up!")
     } else if (this.isLevelComplete()) {
       Game.drawMessage("All clear!");
     }
