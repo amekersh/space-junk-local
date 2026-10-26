@@ -89,6 +89,25 @@ class Magpie {
     if (!this.beam) {
       return false;
     }
+
+    let dx = x - this.physics.x
+    let dy = y - this.physics.y
+    
+    let localX = dx * Math.cos(this.physics.rotation) + dy * Math.sin(this.physics.rotation)
+    let localY = -dy * Math.sin(this.physics.rotation) + dy * Math.cos(this.physics.rotation)
+    
+    const halfWidth = Magpie.BEAM_WIDTH / 2
+    const startY = Magpie.DOME_HEIGHT / 2
+    const endY = startY + Magpie.BEAM_HEIGHT
+
+    return(
+      localY >= startY &&
+      localY <= endY &&
+      Math.abs(localX) <= halfWidth
+    )
+  }
+
+    
     let inside = false;
     drawEverywhere({
       offset: this.physics,
@@ -112,4 +131,3 @@ screenToWorld(x, y);
       this.beam = true;
     }
   }
-}

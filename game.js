@@ -41,10 +41,14 @@ class Game {
   }
 
   move(delta) {
+     if (this.isTimeUp()||this.isLevelComplete()){
+      return
+    }
     this.inputs.handleKeyDown(delta);
     this.magpie.move(delta);
     this.mothership.move(delta);
-    this.level.move(delta, { countTime: !this.isLevelComplete() });
+    this.level.move(delta, { countTime: !this.isLevelComplete()})
+
     const junk = this.resolveBeam(delta);
     if (junk) {
       this.magpie.captureJunk(junk);
@@ -128,6 +132,10 @@ class Game {
     if (reason == "dropoff"){
       this.score = this.score + Game.SCORE_DROPOFF
     }
+  }
+
+  isTimeUp(){
+    return this.level.elapsed >= this.level.time.initial
   }
 
   isLevelComplete() {
